@@ -251,7 +251,7 @@
       <p>Venha conhecer como trabalhamos e visite alguma de nossas obras com acompanhamento técnico. Venha transformar seu sonho em realidade!</p>
       <form id="whatsappForm" onsubmit="sendWhatsAppMessage(event)">
         <div class="form-group">
-          <label for="name">Nome:</label>
+          <label for="name">Nome: </label>
           <input type="text" id="name" name="name" required="">
         </div>
         <div class="form-group">
@@ -262,24 +262,24 @@
           <label for="maritalStatus">É Casado(a)?</label>
           <select id="maritalStatus" name="maritalStatus" required="">
             <option value="">Selecione uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
+            <option value="*sim*">Sim</option>
+            <option value="*nao*">Não</option>
           </select>
         </div>
         <div class="form-group">
           <label for="hasChildren">Tem filho menor ou dependente?</label>
           <select id="hasChildren" name="hasChildren" required="">
             <option value="">Selecione uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
+            <option value="*sim*">Sim</option>
+            <option value="*nao*">Não</option>
           </select>
         </div>
         <div class="form-group">
           <label for="hasHouse">Tem casa na cidade em seu nome?</label>
           <select id="hasHouse" name="hasHouse" required="">
             <option value="">Selecione uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
+            <option value="*sim*">Sim</option>
+            <option value="*nao*">Não</option>
           </select>
         </div>
         <div class="form-group">
@@ -290,8 +290,25 @@
           <label for="Register">Possui 3 Anos de Registro?</label>
           <select id="Register" name="Register" required="">
             <option value="">Selecione uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
+            <option value="*sim*">Sim</option>
+            <option value="*nao*">Não</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="income2">Tem Comprometimento de Renda?</label>
+          <select id="income2" name="income2" required="">
+            <option value="">Selecione uma opção</option>
+            <option value="*sim*">Sim(Pensão, Emprestimo ou Outros)</option>
+            <option value="*nao*">Não</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="TypeFinanc">Qual O tipo de Financiamento que Gostaria?</label>
+          <select id="TypeFinanc" name="TypeFinanc" required="">
+            <option value="">Selecione uma opção</option>
+            <option value="*Construção*">Construção</option>
+            <option value="*Casa Pronta*">Casa Pronta</option>
+            <option value="*Reforma*">Reforma</option>
           </select>
         </div>
         <button type="submit" class="whatsapp-button"><span>Faça Já Uma</span> Simulação de Financiamento</button>
@@ -411,20 +428,33 @@
       const hasHouse = document.getElementById('hasHouse').value;
       const Register = document.getElementById('Register').value;
       const income = document.getElementById('income').value;
+      const income2 = document.getElementById('income2').value;
+      const TypeFinanc = document.getElementById('TypeFinanc').value;
       
-      let text = `Olá, Me Chamo ${name}, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
-Data de Nascimento: ${birthdate}
-É Casado(a): ${maritalStatus}
-Tem filho menor ou dependente: ${hasChildren}
-Tem casa na cidade em seu nome: ${hasHouse}
-Possui 3 Anos de Registro?: ${Register}
-Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+      let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
 
-      // Modified logic: SBPE if has house OR income > 8000
+
+- Data de Nascimento: ${birthdate}
+
+- É Casado(a): ${maritalStatus}
+
+- Tem filho menor ou dependente: ${hasChildren}
+
+- Tem casa na cidade em seu nome: ${hasHouse}
+
+- Possui 3 Anos de Registro: ${Register}
+
+- Possui comprometimento de renda: ${income2}
+
+- Tipo de financiamento: ${TypeFinanc}
+
+- Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+
+
       if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
-        text += "\nLinha de Credito SBPE";
+        text += "\n- Linha de Credito *SBPE*";
       } else {
-        text += "\nLinha de Credito MCMV";
+        text += "\n- Linha de Credito *MCMV*";
       }
       
       const encodedText = encodeURIComponent(text);
