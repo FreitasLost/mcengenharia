@@ -496,35 +496,23 @@
       const observations = document.getElementById('observations').value;
       
       let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
-
 - Telefone: ${phone}  
-
 - Data de Nascimento: ${birthdate}
-
 - É Casado(a): ${maritalStatus}
-
 - Tem filho menor ou dependente: ${hasChildren}
-
 - Tem casa na cidade em seu nome: ${hasHouse}
-
 - Possui 3 Anos de Registro: ${Register}
-
 - Possui comprometimento de renda: ${income2}
-
 - Tipo de financiamento: ${TypeFinanc}
-
 - Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-
       if (observations.trim() !== '') {
         text += `\n\nObservações:\n${observations}`;
       }
-
       if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
         text += "\n- Linha de Credito *SBPE*";
       } else {
         text += "\n- Linha de Credito *MCMV*";
       }
-      
       const encodedText = encodeURIComponent(text);
       const whatsappUrl = `https://wa.me/5517997474015?text=${encodedText}`;
       
