@@ -226,6 +226,25 @@
     form .whatsapp-button span {
       color: #FFD700;
     }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
+    .checkbox-label a {
+      color: #0066CC;
+      text-decoration: none;
+    }
+    .checkbox-label a:hover {
+      text-decoration: underline;
+    }
   </style>
   </head>
   <body>
@@ -240,7 +259,7 @@
       <ul>
         <li><a href="#inicio">Início</a></li>
         <li><a href="preencher.html" target="_blank">Preencher</a></li>
-        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
         <li><a href="https://wa.me/5517997090809?text=Olá,%20gostaria%20de%20entrar%20em%20contato%20com%20a%20M%26C%20Engenharia" target="_blank">Contato</a></li>
       </ul>
     </nav>
@@ -319,6 +338,12 @@
           <div class="form-group">
             <label for="observations">Observações (Opcional):</label>
             <textarea id="observations" name="observations" rows="3" placeholder="Digite aqui suas observações ou comentários adicionais"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+  <input type="checkbox" id="termsAgreement" name="termsAgreement" required="">
+  Concordo em enviar meus dados via WhatsApp Para a Empresa Responsavel Pelo Site e Colaboradores
+</label>
           </div>
           <button type="submit" class="whatsapp-button"><span>Faça Já Uma</span> Simulação de Financiamento</button>
         </form>
@@ -484,6 +509,11 @@
       function sendWhatsAppMessage(event) {
         event.preventDefault();
         
+        if (!document.getElementById('termsAgreement').checked) {
+          alert('Por favor, aceite os termos e condições para continuar.');
+          return;
+        }
+        
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const birthdate = document.getElementById('birthdate').value;
@@ -496,7 +526,7 @@
         const TypeFinanc = document.getElementById('TypeFinanc').value;
         const observations = document.getElementById('observations').value;
         
-        let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as minhas informações Pessoais são:
+        let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
 
   - Telefone: *${phone}*
   - Data de Nascimento: *${birthdate}*
