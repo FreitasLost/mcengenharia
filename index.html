@@ -1,523 +1,527 @@
-<html><head><base href="https://empreendimentos.mc-engenharia.com/">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>M&amp;C Engenharia - Construindo Sonhos, Projetando Futuros</title>
-<style>
-  body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-  }
-  header {
-    background-image: url('cabecalho.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-  .header-text {
-    text-align: center;
-    color: white;
-    z-index: 1;
-  }
-  .header-text h1 {
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  }
-  .header-text p {
-    margin: 0;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 0;
-  }
-  nav {
-    background-color: #2e7d9e;
-    padding: 0.7rem;
-  }
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-  }
-  nav ul li {
-    margin: 0 1.2rem;
-  }
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  nav ul li a:hover {
-    color: #ffd700;
-  }
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-  .gallery img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
-  }
-  .gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-  footer {
-    background-color: #1a5f7a;
-    color: white;
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
-  }
-  .whatsapp-button {
-    background-color: #0066CC;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 1.5rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .whatsapp-button:hover {
-    background-color: #0052A3;
-    transform: translateY(-2px);
-  }
-  h1, h2 {
-    color: #1a5f7a;
-  }
-  section {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .simulation-banner {
-    background-color: #0066CC;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none;
-    display: block;
-  }
-  .simulation-banner:hover {
-    background-color: #0052A3;
-    transform: scale(1.02);
-  }
-  .simulation-banner span {
-    color: #FFD700;
-  }
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-  }
-  .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 900px;
-    max-height: 80%;
-    object-fit: contain;
-  }
-  .close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  .close:hover,
-  .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    margin-top: 2rem;
-  }
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  .form-group textarea {
-    resize: vertical;
-  }
-  form .whatsapp-button {
-    background-color: #0066CC;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    border: none;
-  }
-  form .whatsapp-button:hover {
-    background-color: #0052A3;
-    transform: scale(1.02);
-  }
-  form .whatsapp-button span {
-    color: #FFD700;
-  }
-</style>
-</head>
-<body>
-  <header>
-    <div class="header-text">
-      <h1>M&amp;C Engenharia</h1>
-      <p>Construindo Sonhos, Projetando Futuros</p>
-    </div>
-  </header>
-  
-  <nav>
-    <ul>
-      <li><a href="#inicio">Início</a></li>
-      <li><a href="preencher.html" target="_blank">Preencher</a></li>
-      <li><a href="#sobre">Sobre Nós</a></li>
-      <li><a href="https://wa.me/5517997090809?text=Olá,%20gostaria%20de%20entrar%20em%20contato%20com%20a%20M%26C%20Engenharia" target="_blank">Contato</a></li>
-    </ul>
-  </nav>
-  
-  <main>
-    <section id="inicio">
-      <h2>Bem-vindo à M&amp;C Engenharia</h2>
-      <p>Venha conhecer como trabalhamos e visite alguma de nossas obras com acompanhamento técnico. Venha transformar seu sonho em realidade!</p>
-      <form id="whatsappForm" onsubmit="sendWhatsAppMessage(event)">
-        <div class="form-group">
-          <label for="name">Nome: </label>
-          <input type="text" id="name" name="name" required="">
-        </div>
-        <div class="form-group">
-          <label for="phone">Telefone: </label>
-          <input type="tel" id="phone" name="phone" required placeholder="(99) 99999-9999" oninput="formatPhone(this)">
-        </div>
-        <div class="form-group">
-          <label for="birthdate">Data de Nascimento:</label>
-          <input type="text" id="birthdate" name="birthdate" required="" placeholder="Digite sua data de nascimento (dd/mm/aaaa)" oninput="formatDate(this)">
-        </div>
-        <div class="form-group">
-          <label for="maritalStatus">É Casado(a)?</label>
-          <select id="maritalStatus" name="maritalStatus" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*sim*">Sim</option>
-            <option value="*nao*">Não</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="hasChildren">Tem filho menor ou dependente?</label>
-          <select id="hasChildren" name="hasChildren" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*sim*">Sim</option>
-            <option value="*nao*">Não</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="hasHouse">Tem casa na cidade em seu nome?</label>
-          <select id="hasHouse" name="hasHouse" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*sim*">Sim</option>
-            <option value="*nao*">Não</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="income">Qual sua renda mensal Bruta?</label>
-          <input type="number" id="income" name="income" required="" placeholder="Digite sua renda mensal bruta" min="0" step="0.01">
-        </div>
-        <div class="form-group">
-          <label for="Register">Possui 3 Anos de Registro?</label>
-          <select id="Register" name="Register" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*sim*">Sim</option>
-            <option value="*nao*">Não</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="income2">Tem Comprometimento de Renda?</label>
-          <select id="income2" name="income2" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*sim*">Sim(Pensão, Emprestimo ou Outros)</option>
-            <option value="*nao*">Não</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="TypeFinanc">Qual O tipo de Financiamento que Gostaria?</label>
-          <select id="TypeFinanc" name="TypeFinanc" required="">
-            <option value="">Selecione uma opção</option>
-            <option value="*Construção*">Construção</option>
-            <option value="*Casa Pronta*">Casa Pronta</option>
-            <option value="*Reforma*">Reforma</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="observations">Observações (Opcional):</label>
-          <textarea id="observations" name="observations" rows="3" placeholder="Digite aqui suas observações ou comentários adicionais"></textarea>
-        </div>
-        <button type="submit" class="whatsapp-button"><span>Faça Já Uma</span> Simulação de Financiamento</button>
-      </form>
-    </section>
-    
-    <section id="projetos">
-      <a style="display: none"></a>
-      <h2>Nossos Projetos</h2>
-      <p>Explore nossa galeria de projetos inovadores e inspiradores:</p>
-      <div class="gallery">
-        <img src="https://www.dropbox.com/scl/fi/93wxpzzhyjm6p3yzc47fy/2.png?rlkey=jrzdyr9udz0itk0ii4hf9uvls&amp;st=y91dxve8&amp;dl=1" alt="Casa moderna minimalista com linhas retas e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/mu4kbilh3ct5aw9hl4dqi/casa-1.jpeg?rlkey=tvvtnt8egl3drwacc1wwbturi&amp;st=cpcr1yhs&amp;dl=1" alt="Mansão luxuosa com piscina infinita e vista para o mar" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/vx518icbbabvow6fexrlf/casa-2.jpeg?rlkey=r6tutw986t2r6j531scy18ebo&amp;st=dv14bvta&amp;dl=1" alt="Casa ecológica com telhado verde e painéis solares" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/114tvsmphw44d7mrlom0j/casa-3.jpeg?rlkey=bu8u95zgrfluaxavsw2yli8td&amp;st=zxf93xg5&amp;dl=1" alt="Residência inteligente com sistema de automação integrado" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/mb29o13umh0fl253peuxd/casa-4.jpeg?rlkey=kcwhs5cy437kw4seohovefcnh&amp;st=4ggfdyl4&amp;dl=1" alt="Casa de campo moderna com amplas áreas de convivência" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/z6c54yxcpf93z3wz2bnuq/casa-5.jpeg?rlkey=6g2foitz9gaf9iio2znu5n6ac&amp;st=76o64sk3&amp;dl=1" alt="Apartamento duplex com mezanino e decoração contemporânea" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/f7dzeghw8zc4lec5rj1kw/casa-6.jpeg?rlkey=a1ff3jdkvqxo43cn2mgxsf21a&amp;st=zxdfbwl1&amp;dl=1" alt="Casa de praia sustentável com materiais reciclados" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/dntlzfak5kc37wn7hy2nd/casa-7.jpeg?rlkey=0qxuu4q72ujnjmuo9okstffrb&amp;st=46wgf8yh&amp;dl=1" alt="Residência urbana compacta com aproveitamento máximo de espaço" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/zchlapwqkarw3wy3rm2w2/casa-8.jpeg?rlkey=wsdgq1if124rw519juo06i1d2&amp;st=gsft6snn&amp;dl=1" alt="Casa na árvore de luxo para ecoturismo" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/fh2cwa2ruuqinikz7myha/casa-9.jpeg?rlkey=c4u88uxi7hr2562zv981pz63y&amp;st=nhdopgdg&amp;dl=1" alt="Loft industrial com pé direito alto e decoração vintage" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/jgndw7mv4vhkk06j0vq8b/casa-10.jpeg?rlkey=rtjt6jzct277i4en772ltceko&amp;st=2rlx7v5v&amp;dl=1" alt="Casa flutuante moderna em lago artificial" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/lixs2zwirm7pxq87a83bh/casa-11.jpeg?rlkey=gub89wmd0e1b2evtglvk1mu3w&amp;st=bqylb8xt&amp;dl=1" alt="Residência totalmente acessível para pessoas com mobilidade reduzida" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/189dukfrvxcffgn5usz5i/3.png?rlkey=a8vx51nftk6x9ieygydhbew3g&amp;st=ym9vqmyv&amp;dl=1" alt="Casa passiva com eficiência energética máxima" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/85eupb7rljsjrba9wh5m2/4.png?rlkey=u1gqiv726xei19xz5l57xaxui&amp;st=usbjqnvs&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/1up2zsd9yr2r296yeny2m/5.png?rlkey=lxgtqwy0p41ootvy3op16n3ei&amp;st=o8x16w6d&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/fj8ty6sxahrqkiori6bz5/6.png?rlkey=zcmvk6iunjgah33ohqs2t7dzd&amp;st=w070cmjx&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/532xxfkkv5k9xw2vl3qeg/7.png?rlkey=vely0unyz55utphli4s6qtxn9&amp;st=tidmmcvr&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/8g1mjoqi45nn6w1igjbjs/8.png?rlkey=5yqbwt3jqdke834fv40pcuzca&amp;st=4mjq5ymu&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/7xtw7ztk0um95anaqz946/1.png?rlkey=6753wez4m9y0xd5muck2x6w4u&amp;st=30whrc1v&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/ts33pjhvyg01dw32pnb30/WhatsApp-Image-2023-03-01-at-13.00.33.jpeg?rlkey=uinvuz8nc5htnlbz4ll1q6d3j&amp;st=htsulj7n&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/xcoo1onmhke25nh4xpxnn/WhatsApp-Image-2020-08-13-at-11.32.15-1.jpeg?rlkey=f1ia58ejyfgmgqvu78gwqpgqh&amp;st=w56rtq84&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/bzlpjhlkzlyl00fti82t8/WhatsApp-Image-2022-02-02-at-16.47.41.jpeg?rlkey=2yu70xusi24tnurw7j5bsciay&amp;st=wgg18t17&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/az3jhao0a74i10o9y1h3q/WhatsApp-Image-2020-03-13-at-14.40.34-6.jpeg?rlkey=s0nmxye7vnqnnrr3tcs4sp4b7&amp;st=4zq7mrbf&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/qm13oa4oefi3x1pc7phd2/WhatsApp-Image-2019-12-23-at-12.25.06.jpeg?rlkey=30kmsuxo0bx8vetsux4iyjheb&amp;st=ri03lnae&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/nw6zhmlz5xuqjmnsg5478/WhatsApp-Image-2019-12-23-at-12.25.05.jpeg?rlkey=8rgc9yucz2e2rieo2arxd9ioj&amp;st=5oj4tmwx&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/t42rfomfcoljek6ebvaz2/WhatsApp-Image-2020-11-13-at-16.01.46.jpeg?rlkey=759n2n9xi5zpfir0iwtmokvh3&amp;st=01w329co&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/vd5riovpv24ucthaiw47o/WhatsApp-Image-2021-02-24-at-10.16.31.jpeg?rlkey=ibwtbnhjdhyqrruz8l7x1lbyj&amp;st=bbhxscsd&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/dyg13bz9nfttx5qk20yq5/WhatsApp-Image-2021-02-24-at-10.19.27.jpeg?rlkey=5sishkdn8ltbqzum0yy1mjtii&amp;st=anj5ysms&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
-        <img src="https://www.dropbox.com/scl/fi/g5lbvxndbwzo6ky9h6jec/WhatsApp-Image-2021-02-24-at-10.15.14.jpeg?rlkey=z0b1khmkb7q0qk4nw13963vjp&amp;st=aj83yxw3&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+<!DOCTYPE html><html><head><base href="https://empreendimentos.mc-engenharia.com/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M&amp;C Engenharia - Construindo Sonhos, Projetando Futuros</title>
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-image: url('cabecalho.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .header-text {
+      text-align: center;
+      color: white;
+      z-index: 1;
+    }
+    .header-text h1 {
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .header-text p {
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    nav {
+      background-color: #2e7d9e;
+      padding: 0.7rem;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 1.2rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #ffd700;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    footer {
+      background-color: #1a5f7a;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .whatsapp-button {
+      background-color: #0066CC;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1.5rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .whatsapp-button:hover {
+      background-color: #0052A3;
+      transform: translateY(-2px);
+    }
+    h1, h2 {
+      color: #1a5f7a;
+    }
+    section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .simulation-banner {
+      background-color: #0066CC;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .simulation-banner:hover {
+      background-color: #0052A3;
+      transform: scale(1.02);
+    }
+    .simulation-banner span {
+      color: #FFD700;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 900px;
+      max-height: 80%;
+      object-fit: contain;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      margin-top: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    form .whatsapp-button {
+      background-color: #0066CC;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      border: none;
+    }
+    form .whatsapp-button:hover {
+      background-color: #0052A3;
+      transform: scale(1.02);
+    }
+    form .whatsapp-button span {
+      color: #FFD700;
+    }
+  </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-text">
+        <h1>M&amp;C Engenharia</h1>
+        <p>Construindo Sonhos, Projetando Futuros</p>
       </div>
-      <a href="https://wa.me/5517997090809?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20projetos%20da%20M%26C%20Engenharia" class="whatsapp-button" target="_blank">Venha Já Realizar Seu Sonho da Casa Própria</a>
-    </section>
+    </header>
     
-    <section id="sobre">
-      <h2>Sobre Nós</h2>
-      <p>A M&amp;C Engenharia é liderada pelo engenheiro Marcos Procópio, um verdadeiro mestre construtor com décadas de experiência no setor. Reconhecido por sua excelência técnica e visão inovadora, Marcos transformou a M&amp;C em uma referência de qualidade e confiabilidade no mercado de construção civil.</p>
-      <a href="redes.html" class="whatsapp-button" target="_blank">Venha Acompanhar nas Nossas Redes Sociais</a>
-    </section>
+    <nav>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="preencher.html" target="_blank">Preencher</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="https://wa.me/5517997090809?text=Olá,%20gostaria%20de%20entrar%20em%20contato%20com%20a%20M%26C%20Engenharia" target="_blank">Contato</a></li>
+      </ul>
+    </nav>
     
-    <section id="contato">
-      <h2>Entre em Contato</h2>
-      <p>Estamos prontos para transformar suas ideias em realidade. Entre em contato para uma consultoria personalizada e descubra como podemos colaborar em seu próximo projeto.</p>
-      <p>Telefone: (17) 99709-0809</p>
-      <p>Email: mcengenharianh@gmail.com</p>
-      <p>Endereço: Campos Sales, 757, Novo Horizonte SP</p>
-    </section>
-  </main>
-  
-  <footer>
-    <p>© 2023 M&amp;C Engenharia. Todos os direitos reservados.</p>
-  </footer>
-
-  <div id="imageModal" class="modal">
-    <span class="close">×</span>
-    <img class="modal-content" id="modalImage">
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const navLinks = document.querySelectorAll('nav a:not([href^="https://wa.me"])');
+    <main>
+      <section id="inicio">
+        <h2>Bem-vindo à M&amp;C Engenharia</h2>
+        <p>Venha conhecer como trabalhamos e visite alguma de nossas obras com acompanhamento técnico. Venha transformar seu sonho em realidade!</p>
+        <form id="whatsappForm" onsubmit="sendWhatsAppMessage(event)">
+          <div class="form-group">
+            <label for="name">Nome: </label>
+            <input type="text" id="name" name="name" required="">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefone: </label>
+            <input type="tel" id="phone" name="phone" required="" placeholder="(99) 99999-9999" oninput="formatPhone(this)">
+          </div>
+          <div class="form-group">
+            <label for="birthdate">Data de Nascimento do Mais Velho:</label>
+            <input type="text" id="birthdate" name="birthdate" required="" placeholder="Digite sua data de nascimento (dd/mm/aaaa)" oninput="formatDate(this)">
+          </div>
+          <div class="form-group">
+            <label for="maritalStatus">É Casado(a)?</label>
+            <select id="maritalStatus" name="maritalStatus" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*sim*">Sim</option>
+              <option value="*não*">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hasChildren">Tem filho menor ou dependente?</label>
+            <select id="hasChildren" name="hasChildren" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*sim*">Sim</option>
+              <option value="*não*">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hasHouse">Tem casa na cidade em seu nome?</label>
+            <select id="hasHouse" name="hasHouse" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*sim*">Sim</option>
+              <option value="*não*">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="income">Qual sua renda mensal Bruta? (Se Casado Incluir Renda Bruta do Conjuge ou Outra renda que irá entrar junto no Financiamento)</label>
+            <input type="number" id="income" name="income" required="" placeholder="Digite sua renda mensal bruta" min="0" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="Register">Possui 3 Anos de Registro ou mais?</label>
+            <select id="Register" name="Register" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*sim*">Sim</option>
+              <option value="*não*">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="income2">Tem Comprometimento de Renda?</label>
+            <select id="income2" name="income2" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*sim*">Sim(Pensão, Emprestimo ou Outros)</option>
+              <option value="*não*">Não</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="TypeFinanc">Qual O tipo de Financiamento que Gostaria?</label>
+            <select id="TypeFinanc" name="TypeFinanc" required="">
+              <option value="">Selecione uma opção</option>
+              <option value="*Construção*">Construção</option>
+              <option value="*Casa Usada*">Casa Usada(feita há mais de 6 meses)</option>
+              <option value="*Casa Nova*">Casa Nova(Com Menos de 6 Meses)</option>
+              <option value="*Reforma*">Reforma</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="observations">Observações (Opcional):</label>
+            <textarea id="observations" name="observations" rows="3" placeholder="Digite aqui suas observações ou comentários adicionais"></textarea>
+          </div>
+          <button type="submit" class="whatsapp-button"><span>Faça Já Uma</span> Simulação de Financiamento</button>
+        </form>
+      </section>
       
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href').substring(1);
-          const targetElement = document.getElementById(targetId);
-          
-          window.scrollTo({
-            top: targetElement.offsetTop - 70,
-            behavior: 'smooth'
+      <section id="projetos">
+        <a style="display: none"></a>
+        <h2>Nossos Projetos</h2>
+        <p>Explore nossa galeria de projetos inovadores e inspiradores:</p>
+        <div class="gallery">
+          <img src="https://www.dropbox.com/scl/fi/93wxpzzhyjm6p3yzc47fy/2.png?rlkey=jrzdyr9udz0itk0ii4hf9uvls&amp;st=y91dxve8&amp;dl=1" alt="Casa moderna minimalista com linhas retas e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/mu4kbilh3ct5aw9hl4dqi/casa-1.jpeg?rlkey=tvvtnt8egl3drwacc1wwbturi&amp;st=cpcr1yhs&amp;dl=1" alt="Mansão luxuosa com piscina infinita e vista para o mar" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/vx518icbbabvow6fexrlf/casa-2.jpeg?rlkey=r6tutw986t2r6j531scy18ebo&amp;st=dv14bvta&amp;dl=1" alt="Casa ecológica com telhado verde e painéis solares" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/114tvsmphw44d7mrlom0j/casa-3.jpeg?rlkey=bu8u95zgrfluaxavsw2yli8td&amp;st=zxf93xg5&amp;dl=1" alt="Residência inteligente com sistema de automação integrado" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/mb29o13umh0fl253peuxd/casa-4.jpeg?rlkey=kcwhs5cy437kw4seohovefcnh&amp;st=4ggfdyl4&amp;dl=1" alt="Casa de campo moderna com amplas áreas de convivência" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/z6c54yxcpf93z3wz2bnuq/casa-5.jpeg?rlkey=6g2foitz9gaf9iio2znu5n6ac&amp;st=76o64sk3&amp;dl=1" alt="Apartamento duplex com mezanino e decoração contemporânea" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/f7dzeghw8zc4lec5rj1kw/casa-6.jpeg?rlkey=a1ff3jdkvqxo43cn2mgxsf21a&amp;st=zxdfbwl1&amp;dl=1" alt="Casa de praia sustentável com materiais reciclados" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/dntlzfak5kc37wn7hy2nd/casa-7.jpeg?rlkey=0qxuu4q72ujnjmuo9okstffrb&amp;st=46wgf8yh&amp;dl=1" alt="Residência urbana compacta com aproveitamento máximo de espaço" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/zchlapwqkarw3wy3rm2w2/casa-8.jpeg?rlkey=wsdgq1if124rw519juo06i1d2&amp;st=gsft6snn&amp;dl=1" alt="Casa na árvore de luxo para ecoturismo" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/fh2cwa2ruuqinikz7myha/casa-9.jpeg?rlkey=c4u88uxi7hr2562zv981pz63y&amp;st=nhdopgdg&amp;dl=1" alt="Loft industrial com pé direito alto e decoração vintage" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/jgndw7mv4vhkk06j0vq8b/casa-10.jpeg?rlkey=rtjt6jzct277i4en772ltceko&amp;st=2rlx7v5v&amp;dl=1" alt="Casa flutuante moderna em lago artificial" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/lixs2zwirm7pxq87a83bh/casa-11.jpeg?rlkey=gub89wmd0e1b2evtglvk1mu3w&amp;st=bqylb8xt&amp;dl=1" alt="Residência totalmente acessível para pessoas com mobilidade reduzida" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/189dukfrvxcffgn5usz5i/3.png?rlkey=a8vx51nftk6x9ieygydhbew3g&amp;st=ym9vqmyv&amp;dl=1" alt="Casa passiva com eficiência energética máxima" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/85eupb7rljsjrba9wh5m2/4.png?rlkey=u1gqiv726xei19xz5l57xaxui&amp;st=usbjqnvs&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/1up2zsd9yr2r296yeny2m/5.png?rlkey=lxgtqwy0p41ootvy3op16n3ei&amp;st=o8x16w6d&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/fj8ty6sxahrqkiori6bz5/6.png?rlkey=zcmvk6iunjgah33ohqs2t7dzd&amp;st=w070cmjx&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/532xxfkkv5k9xw2vl3qeg/7.png?rlkey=vely0unyz55utphli4s6qtxn9&amp;st=tidmmcvr&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/8g1mjoqi45nn6w1igjbjs/8.png?rlkey=5yqbwt3jqdke834fv40pcuzca&amp;st=4mjq5ymu&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/7xtw7ztk0um95anaqz946/1.png?rlkey=6753wez4m9y0xd5muck2x6w4u&amp;st=30whrc1v&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/ts33pjhvyg01dw32pnb30/WhatsApp-Image-2023-03-01-at-13.00.33.jpeg?rlkey=uinvuz8nc5htnlbz4ll1q6d3j&amp;st=htsulj7n&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/xcoo1onmhke25nh4xpxnn/WhatsApp-Image-2020-08-13-at-11.32.15-1.jpeg?rlkey=f1ia58ejyfgmgqvu78gwqpgqh&amp;st=w56rtq84&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/bzlpjhlkzlyl00fti82t8/WhatsApp-Image-2022-02-02-at-16.47.41.jpeg?rlkey=2yu70xusi24tnurw7j5bsciay&amp;st=wgg18t17&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/az3jhao0a74i10o9y1h3q/WhatsApp-Image-2020-03-13-at-14.40.34-6.jpeg?rlkey=s0nmxye7vnqnnrr3tcs4sp4b7&amp;st=4zq7mrbf&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/qm13oa4oefi3x1pc7phd2/WhatsApp-Image-2019-12-23-at-12.25.06.jpeg?rlkey=30kmsuxo0bx8vetsux4iyjheb&amp;st=ri03lnae&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/nw6zhmlz5xuqjmnsg5478/WhatsApp-Image-2019-12-23-at-12.25.05.jpeg?rlkey=8rgc9yucz2e2rieo2arxd9ioj&amp;st=5oj4tmwx&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/t42rfomfcoljek6ebvaz2/WhatsApp-Image-2020-11-13-at-16.01.46.jpeg?rlkey=759n2n9xi5zpfir0iwtmokvh3&amp;st=01w329co&amp;dl=1" alt="Residência com fachada de vidro e vista panorâmica" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/vd5riovpv24ucthaiw47o/WhatsApp-Image-2021-02-24-at-10.16.31.jpeg?rlkey=ibwtbnhjdhyqrruz8l7x1lbyj&amp;st=bbhxscsd&amp;dl=1" alt="Casa subterrânea com design inovador e sustentável" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/dyg13bz9nfttx5qk20yq5/WhatsApp-Image-2021-02-24-at-10.19.27.jpeg?rlkey=5sishkdn8ltbqzum0yy1mjtii&amp;st=anj5ysms&amp;dl=1" alt="Chalé moderno com telhado inclinado e grandes janelas" width="250" height="200">
+          <img src="https://www.dropbox.com/scl/fi/g5lbvxndbwzo6ky9h6jec/WhatsApp-Image-2021-02-24-at-10.15.14.jpeg?rlkey=z0b1khmkb7q0qk4nw13963vjp&amp;st=aj83yxw3&amp;dl=1" alt="Casa protótipo do futuro com tecnologias inovadoras" width="250" height="200">
+        </div>
+        <a href="https://wa.me/5517997090809?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20projetos%20da%20M%26C%20Engenharia" class="whatsapp-button" target="_blank">Venha Já Realizar Seu Sonho da Casa Própria</a>
+      </section>
+      
+      <section id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>A M&amp;C Engenharia é liderada pelo engenheiro Marcos Procópio, um verdadeiro mestre construtor com décadas de experiência no setor. Reconhecido por sua excelência técnica e visão inovadora, Marcos transformou a M&amp;C em uma referência de qualidade e confiabilidade no mercado de construção civil.</p>
+        <a href="redes.html" class="whatsapp-button" target="_blank">Venha Acompanhar nas Nossas Redes Sociais</a>
+      </section>
+      
+      <section id="contato">
+        <h2>Entre em Contato</h2>
+        <p>Estamos prontos para transformar suas ideias em realidade. Entre em contato para uma consultoria personalizada e descubra como podemos colaborar em seu próximo projeto.</p>
+        <p>Telefone: (17) 99709-0809</p>
+        <p>Email: mcengenharianh@gmail.com</p>
+        <p>Endereço: Campos Sales, 757, Novo Horizonte SP</p>
+      </section>
+    </main>
+    
+    <footer>
+      <p>© 2023 M&amp;C Engenharia. Todos os direitos reservados.</p>
+    </footer>
+  
+    <div id="imageModal" class="modal">
+      <span class="close">×</span>
+      <img class="modal-content" id="modalImage">
+    </div>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('nav a:not([href^="https://wa.me"])');
+        
+        navLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            window.scrollTo({
+              top: targetElement.offsetTop - 70,
+              behavior: 'smooth'
+            });
           });
         });
-      });
-
-      const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImage");
-      const closeBtn = document.getElementsByClassName("close")[0];
-      const galleryImages = document.querySelectorAll('.gallery img');
-
-      galleryImages.forEach(img => {
-        img.onclick = function() {
-          modal.style.display = "block";
-          modalImg.src = this.src;
-          modalImg.alt = this.alt;
-        }
-      });
-
-      closeBtn.onclick = function() {
-        modal.style.display = "none";
-      }
-
-      window.onclick = function(event) {
-        if (event.target == modal) {
+  
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.getElementsByClassName("close")[0];
+        const galleryImages = document.querySelectorAll('.gallery img');
+  
+        galleryImages.forEach(img => {
+          img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+          }
+        });
+  
+        closeBtn.onclick = function() {
           modal.style.display = "none";
         }
-      }
-    });
-
-    function formatDate(input) {
-      let value = input.value.replace(/\D/g, '');
-      if (value.length > 0) {
-        if (value.length > 2) {
-          value = value.substring(0,2) + '/' + value.substring(2);
+  
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
         }
-        if (value.length > 5) {
-          value = value.substring(0,5) + '/' + value.substring(5,9);
-        }
-        input.value = value;
-      }
-      
-      // Validação básica de data
-      if (value.length === 10) {
-        let parts = value.split('/');
-        let day = parseInt(parts[0]);
-        let month = parseInt(parts[1]);
-        let year = parseInt(parts[2]);
-        
-        if (month > 12) {
-          input.value = '';
-          alert('Mês inválido');
-          return;
+      });
+  
+      function formatDate(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 0) {
+          if (value.length > 2) {
+            value = value.substring(0,2) + '/' + value.substring(2);
+          }
+          if (value.length > 5) {
+            value = value.substring(0,5) + '/' + value.substring(5,9);
+          }
+          input.value = value;
         }
         
-        let daysInMonth = new Date(year, month, 0).getDate();
-        if (day > daysInMonth) {
-          input.value = '';
-          alert('Dia inválido para o mês selecionado');
-          return;
+        // Validação básica de data
+        if (value.length === 10) {
+          let parts = value.split('/');
+          let day = parseInt(parts[0]);
+          let month = parseInt(parts[1]);
+          let year = parseInt(parts[2]);
+          
+          if (month > 12) {
+            input.value = '';
+            alert('Mês inválido');
+            return;
+          }
+          
+          let daysInMonth = new Date(year, month, 0).getDate();
+          if (day > daysInMonth) {
+            input.value = '';
+            alert('Dia inválido para o mês selecionado');
+            return;
+          }
+          
+          let currentYear = new Date().getFullYear();
+          if (year > currentYear || year < 1900) {
+            input.value = '';
+            alert('Ano inválido');
+            return;
+          }
         }
+      }
+  
+      function formatPhone(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 0) {
+          if (value.length > 2) {
+            value = '(' + value.substring(0,2) + ') ' + value.substring(2);
+          }
+          if (value.length > 9) {
+            value = value.substring(0,10) + '-' + value.substring(10,14);
+          }
+          input.value = value;
+        }
+      }
+  
+      function sendWhatsAppMessage(event) {
+        event.preventDefault();
         
-        let currentYear = new Date().getFullYear();
-        if (year > currentYear || year < 1900) {
-          input.value = '';
-          alert('Ano inválido');
-          return;
-        }
-      }
-    }
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const birthdate = document.getElementById('birthdate').value;
+        const maritalStatus = document.getElementById('maritalStatus').value;
+        const hasChildren = document.getElementById('hasChildren').value;
+        const hasHouse = document.getElementById('hasHouse').value;
+        const Register = document.getElementById('Register').value;
+        const income = document.getElementById('income').value;
+        const income2 = document.getElementById('income2').value;
+        const TypeFinanc = document.getElementById('TypeFinanc').value;
+        const observations = document.getElementById('observations').value;
+        
+        let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as minhas informações Pessoais são:
 
-    function formatPhone(input) {
-      let value = input.value.replace(/\D/g, '');
-      if (value.length > 0) {
-        if (value.length > 2) {
-          value = '(' + value.substring(0,2) + ') ' + value.substring(2);
+  - Telefone: *${phone}*
+  - Data de Nascimento: *${birthdate}*
+  - É Casado(a): ${maritalStatus}
+  - Tem filho menor ou dependente: ${hasChildren}
+  - Tem casa na cidade em seu nome: ${hasHouse}
+  - Possui 3 Anos de Registro ou mais: ${Register}
+  - Possui comprometimento de renda: ${income2}
+  - Tipo de financiamento: ${TypeFinanc}
+  - Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
+          text += "\n  - Linha de Credito: *SBPE*";
+        } else {
+          text += "\n  - Linha de Credito: *MCMV*";
         }
-        if (value.length > 9) {
-          value = value.substring(0,10) + '-' + value.substring(10,14);
+        if (observations.trim() !== '') {
+          text += `\n\nObservações:\n${observations}`;
         }
-        input.value = value;
-      }
-    }
 
-    function sendWhatsAppMessage(event) {
-      event.preventDefault();
-      
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-      const birthdate = document.getElementById('birthdate').value;
-      const maritalStatus = document.getElementById('maritalStatus').value;
-      const hasChildren = document.getElementById('hasChildren').value;
-      const hasHouse = document.getElementById('hasHouse').value;
-      const Register = document.getElementById('Register').value;
-      const income = document.getElementById('income').value;
-      const income2 = document.getElementById('income2').value;
-      const TypeFinanc = document.getElementById('TypeFinanc').value;
-      const observations = document.getElementById('observations').value;
-      
-      let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
-- Telefone: ${phone}  
-- Data de Nascimento: ${birthdate}
-- É Casado(a): ${maritalStatus}
-- Tem filho menor ou dependente: ${hasChildren}
-- Tem casa na cidade em seu nome: ${hasHouse}
-- Possui 3 Anos de Registro: ${Register}
-- Possui comprometimento de renda: ${income2}
-- Tipo de financiamento: ${TypeFinanc}
-- Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-      if (observations.trim() !== '') {
-        text += `\n\nObservações:\n${observations}`;
-      }
-      if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
-        text += "\n- Linha de Credito *SBPE*";
-      } else {
-        text += "\n- Linha de Credito *MCMV*";
-      }
-      const encodedText = encodeURIComponent(text);
-      const whatsappUrl = `https://wa.me/5517997474015?text=${encodedText}`;
-      
-      window.open(whatsappUrl, '_blank');
-    }
-</script>
 
-</body></html>
+        const encodedText = encodeURIComponent(text);
+        const whatsappUrl = `https://wa.me/5517997474015?text=${encodedText}`;
+        
+        window.open(whatsappUrl, '_blank');
+      }
+  </script>
+  
+  </body></html>
