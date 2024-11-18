@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><base href="https://mcengenharia.shop/">
+<html><head><base href="https://empreendimentos.mc-engenharia.com/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M&amp;C Engenharia - Construindo Sonhos, Projetando Futuros</title>
@@ -255,6 +255,10 @@
           <input type="text" id="name" name="name" required="">
         </div>
         <div class="form-group">
+          <label for="phone">Telefone: </label>
+          <input type="tel" id="phone" name="phone" required placeholder="(99) 99999-9999" oninput="formatPhone(this)">
+        </div>
+        <div class="form-group">
           <label for="birthdate">Data de Nascimento:</label>
           <input type="text" id="birthdate" name="birthdate" required="" placeholder="Digite sua data de nascimento (dd/mm/aaaa)" oninput="formatDate(this)">
         </div>
@@ -310,6 +314,10 @@
             <option value="*Casa Pronta*">Casa Pronta</option>
             <option value="*Reforma*">Reforma</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="observations">Observações (Opcional):</label>
+          <textarea id="observations" name="observations" rows="3" placeholder="Digite aqui suas observações ou comentários adicionais"></textarea>
         </div>
         <button type="submit" class="whatsapp-button"><span>Faça Já Uma</span> Simulação de Financiamento</button>
       </form>
@@ -459,10 +467,24 @@
       }
     }
 
+    function formatPhone(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 0) {
+        if (value.length > 2) {
+          value = '(' + value.substring(0,2) + ') ' + value.substring(2);
+        }
+        if (value.length > 9) {
+          value = value.substring(0,10) + '-' + value.substring(10,14);
+        }
+        input.value = value;
+      }
+    }
+
     function sendWhatsAppMessage(event) {
       event.preventDefault();
       
       const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
       const birthdate = document.getElementById('birthdate').value;
       const maritalStatus = document.getElementById('maritalStatus').value;
       const hasChildren = document.getElementById('hasChildren').value;
@@ -471,9 +493,11 @@
       const income = document.getElementById('income').value;
       const income2 = document.getElementById('income2').value;
       const TypeFinanc = document.getElementById('TypeFinanc').value;
+      const observations = document.getElementById('observations').value;
       
       let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as informações são:
 
+- Telefone: ${phone}  
 
 - Data de Nascimento: ${birthdate}
 
@@ -491,6 +515,9 @@
 
 - Renda Mensal: R$ ${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
 
+      if (observations.trim() !== '') {
+        text += `\n\nObservações:\n${observations}`;
+      }
 
       if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
         text += "\n- Linha de Credito *SBPE*";
