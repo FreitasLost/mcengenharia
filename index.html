@@ -536,26 +536,26 @@
           
           let text = `Olá, Me Chamo *${name}*, Vim Pelo site da M&C Engenharia! Quero fazer uma Simulação de Financiamento, as minhas informações Pessoais são:
   
-    - Tipo de financiamento: ${TypeFinanc}
-    - Telefone: *${phone}*
-    - Renda Mensal: R$ *${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}*
-    - Data de Nascimento: *${birthdate}*
-    - É Casado(a): ${maritalStatus}
-    - Tem filho menor ou dependente: ${hasChildren}
-    - Tem casa na cidade em seu nome: ${hasHouse}
-    - Possui 3 Anos de Registro ou mais: ${Register}
-    - Possui comprometimento de renda: ${income2}`;
+- Tipo de financiamento: ${TypeFinanc}
+- Telefone: *${phone}*
+- Renda Mensal: R$ *${parseFloat(income).toLocaleString('pt-BR', {minimumFractionDigits: 2})}*
+- Data de Nascimento: *${birthdate}*
+- É Casado(a): ${maritalStatus}
+- Tem filho menor ou dependente: ${hasChildren}
+- Tem casa na cidade em seu nome: ${hasHouse}
+- Possui 3 Anos de Registro ou mais: ${Register}
+- Possui comprometimento de renda: ${income2}`;
     if (parseFloat(income) >= 1700.00 && parseFloat(income) <= 4700.00) {
-            text += "\n  - Simulação Em: *190.000,00*";
+            text += "\n- Simulação Em: *190.000,00*";
             } else if (parseFloat(income) > 4700.00 && parseFloat(income) <= 6000.00) {
-            text += "\n  - Simular Proximo aos: *250.000,00*";
+            text += "\n- Simular Proximo aos: *250.000,00*";
             } else if (parseFloat(income) > 6000.00) {
-            text += "\n    - Simular Acima de: *350.000,00*";
+            text += "\n- Simular Acima de: *350.000,00*";
             }
           if (hasHouse === "sim" || parseFloat(income) > 8000.00) {
-            text += "\n    - Linha de Credito: *SBPE*";
+            text += "\n- Linha de Credito: *SBPE*";
           } else {
-            text += "\n    - Linha de Credito: *Minha Casa Minha Vida(MCMV)*";
+            text += "\n- Linha de Credito: *Minha Casa Minha Vida(MCMV)*";
           }
           if (observations.trim() !== '') {
             text += `\n\nObservações:\n${observations}`;
