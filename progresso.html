@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Estilo para o botão de impressão */
+        .print-button {
+            background-color: #4CAF50; /* Cor de fundo verde */
+            border: none; /* Remove a borda */
+            color: white; /* Cor do texto branco */
+            padding: 10px 20px; /* Espaçamento interno */
+            text-align: center; /* Centraliza o texto */
+            text-decoration: none; /* Remove o sublinhado padrão */
+            display: inline-block; /* Permite definir largura e altura */
+            font-size: 16px; /* Tamanho da fonte */
+            margin: 4px 2px; /* Margem */
+            cursor: pointer; /* Muda o cursor ao passar por cima */
+            border-radius: 5px; /* Borda arredondada */
+        }
+
+        /* Oculta o botão de impressão durante a impressão */
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+
+        /* Estilo para a barra de progresso */
+        .progress-bar-container {
+            width: 70%; /* Diminui a largura da barra */
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden; /* Garante que a barra interna não ultrapasse as bordas */
+            display: inline-block; /* Permite que a barra e a porcentagem fiquem lado a lado */
+            margin-right: 5px; /* Espaçamento entre a barra e a porcentagem */
+        }
+
+        .progress-bar {
+            background-color: #4CAF50;
+            height: 20px;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 20px;
+            color: black;
+            width: 0%; /* Inicialmente vazia, será preenchida via JavaScript */
+        }
+
+        .progress-percentage {
+            display: inline-block; /* Alinha a porcentagem horizontalmente */
+            width: 25%; /* Define a largura da porcentagem */
+            text-align: right; /* Alinha o texto à direita */
+        }
+    </style>
+</head>
+<body>
+
+    <img src="logo.png" alt="Logo" style="max-width: 100px; margin-bottom: 10px;">
+    <h1>Gerenciamento de Clientes</h1>
+
+    <table id="clientsTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Progresso</th>
+                <th>Status</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os dados dos clientes serão inseridos aqui via JavaScript -->
+        </tbody>
+    </table>
+
+    <button class="print-button" onclick="window.print()">Imprimir Página</button>
+
+    <script>
+        const clients = [
+            { name: 'Carlos', progress: 12, status: 'Aguardando', observation: 'Holerite 05/03' },
+            { name: 'Kelly Sorvete', progress: 1, status: 'Aguardando', observation: 'Sem Obs' },
+            { name: 'Andreia Pardinha', progress: 1, status: 'Aguardando', observation: 'Sem Obs' },
+            { name: 'Daisy', progress: 40, status: 'Em Prefeitura', observation: 'Aguardando Pref' },
+            { name: 'David', progress: 10, status: 'Aguardando Restrição', observation: 'Ja Pago' },
+            { name: 'José', progress: 40, status: 'Em Prefeitura', observation: 'Aguardando Voltar da Prefeitura' },
+            { name: 'Ruan', progress: 1, status: 'Aguardando Holerite', observation: 'Safra' },
+            { name: 'Beatriz', progress: 40, status: 'Em Prefeitura', observation: 'Aguardando Voltar Prefeitura' }
+        ];
+
+        function populateTable() {
+            const tableBody = document.getElementById('clientsTable').getElementsByTagName('tbody')[0];
+
+            // Ordena os clientes com base no progresso (do maior para o menor)
+            clients.sort((a, b) => b.progress - a.progress);
+
+            clients.forEach(client => {
+                let row = tableBody.insertRow();
+                let nameCell = row.insertCell();
+                let progressCell = row.insertCell();
+                let statusCell = row.insertCell();
+                let observationCell = row.insertCell();
+
+                nameCell.innerHTML = client.name;
+
+                // Cria a estrutura da barra de progresso
+                let progressContainer = document.createElement('div');
+                progressContainer.className = 'progress-bar-container';
+                let progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressBar.style.width = client.progress + '%'; // Define a largura da barra
+                progressBar.innerHTML = client.progress + '%'; // Exibe a porcentagem dentro da barra
+
+                let progressPercentage = document.createElement('span');
+                progressPercentage.className = 'progress-percentage';
+                progressPercentage.innerHTML = client.progress + '%';
+
+                progressContainer.appendChild(progressBar);
+                progressCell.appendChild(progressContainer);
+                //progressCell.appendChild(progressPercentage);
+
+                statusCell.innerHTML = client.status;
+                observationCell.innerHTML = client.observation;
+            });
+        }
+
+        populateTable();
+    </script>
+
+</body>
+</html>
