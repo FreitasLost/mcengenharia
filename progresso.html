@@ -65,6 +65,9 @@
             h1 {
                 text-align: center; /* Centraliza o texto do título */
             }
+            .back-button {
+                display: none;
+            }
         }
 
         /* Estilo para a barra de progresso */
@@ -92,6 +95,20 @@
             width: 25%; /* Define a largura da porcentagem */
             text-align: right; /* Alinha o texto à direita */
         }
+
+        .back-button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -114,6 +131,42 @@
     </table>
 
     <button class="print-button" onclick="window.print()">Imprimir Página</button>
+    <button class="back-button" onclick="window.location.href='index.html'">Voltar</button>
+
+    <h2>Controle de PLS</h2>
+    <table id="plsTable">
+        <thead>
+            <tr>
+                <th>Nome do Cliente</th>
+                <th>PLS 1</th>
+                <th>PLS 2</th>
+                <th>PLS 3</th>
+                <th>PLS 4</th>
+                <th>PLS 5</th>
+                <th>PLS 6</th>
+                <th>PLS 7</th>
+                <th>PLS 8</th>
+                <th>PLS 9</th>
+                <th>PLS 10</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cliente Exemplo</td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+                <td><span style="border: 1px solid black; display: inline-block; width: 15px; height: 15px; margin: 5px;"></span></td>
+            </tr>
+            <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
 
     <script>
         const clients = [
@@ -121,7 +174,6 @@
             { name: 'Kelly Sorvete', progress: 1, status: 'Aguardando', observation: 'Sem Obs' },
             { name: 'Andreia Pardinha', progress: 1, status: 'Aguardando', observation: 'Sem Obs' },
             { name: 'Daisy', progress: 40, status: 'Em Prefeitura', observation: 'Aguardando Pref' },
-            { name: 'Carol', progress: 60, status: 'Assinatura de Contrato', observation: 'Terça 17/04' },
             { name: 'David', progress: 10, status: 'Aguardando Restrição', observation: 'Ja Pago' },
             { name: 'José', progress: 40, status: 'Em Prefeitura', observation: 'Aguardando Voltar da Prefeitura' },
             { name: 'Ruan', progress: 1, status: 'Aguardando Holerite', observation: 'Safra' },
