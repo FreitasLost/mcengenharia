@@ -50,6 +50,21 @@
             .print-button {
                 display: none;
             }
+
+            /* Centraliza a logo e o título durante a impressão */
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            img {
+                margin: 0 auto; /* Centraliza a imagem horizontalmente */
+            }
+
+            h1 {
+                text-align: center; /* Centraliza o texto do título */
+            }
         }
 
         /* Estilo para a barra de progresso */
